@@ -1,0 +1,48 @@
+-- Création de la table h_categorie
+172.80.237.53
+CREATE TABLE h_admin (
+    id_admin INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    mdp VARCHAR(255) NOT NULL
+);
+INSERT INTO h_admin (email, mdp) VALUES ('admin@example.com', 'securepassword');
+
+CREATE TABLE h_categorie (
+    id_categorie INT AUTO_INCREMENT PRIMARY KEY,
+    nom_categorie VARCHAR(20)
+);
+
+INSERT INTO h_categorie (nom_categorie) VALUES
+('Men''s'),
+('Women''s'),
+('Kid''s');
+
+
+CREATE TABLE h_produit (
+    id_produit INT AUTO_INCREMENT PRIMARY KEY,
+    nom_produit VARCHAR(50),
+    prix DOUBLE,
+    nombre INT,
+    date_vente DATE,
+    etoile INT DEFAULT 0,
+    description TEXT,
+    id_categorie INT,
+    profil_image VARCHAR(50),
+    FOREIGN KEY (id_categorie) REFERENCES h_categorie(id_categorie)
+);
+CREATE TABLE h_caracteristique_images ( 
+    id_image INT AUTO_INCREMENT PRIMARY KEY, 
+    id_produit INT,                    
+    image VARCHAR(70) NOT NULL,          
+    FOREIGN KEY (id_produit) REFERENCES h_produit(id_produit) ON DELETE CASCADE
+);
+
+
+
+INSERT INTO h_produit (nom_produit, prix, profil_image, nombre, date_vente, description, id_categorie, etoile) VALUES
+('Classic Spring', 120.00, 'men-01.jpg', 10, '2024-11-15', 'Chaussures de sport classique pour homme, parfaites pour le printemps.', 1, 4),
+('Air Force X', 90.00, 'men-02.jpg', 30, '2024-11-15', 'Modèle iconique Air Force, idéal pour un look urbain.', 1, 5),
+('Love Nana ‘20', 150.00, 'men-03.jpg', 20, '2024-11-15', 'Chaussures tendance pour hommes avec un style moderne.', 1, 3),
+('Classic Spring2', 120.00, 'men-01.jpg', 10, '2024-11-15', 'Version améliorée de la chaussure Classic Spring.', 1, 4),
+
+('New Green Jacket', 75.00, 'women-01.jpg', 10, '2024-11-11', 'Veste légère et élég
